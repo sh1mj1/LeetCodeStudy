@@ -1,19 +1,18 @@
 class Solution {
     fun merge(nums1: IntArray, m: Int, nums2: IntArray, n: Int): Unit {
-        simpleMerge(nums1, m, nums2, n)
-    //     if(n == 0) return
-    //     var p = m+n-1
-    //     var p1 = m-1
-    //     var p2 = n-1
+        if(n == 0) return
+        var p = m+n-1
+        var p1 = m-1
+        var p2 = n-1
         
-    //     while(p >=0) {
-    //         if(p2 < 0) break
-    //         if( p1 < 0 || nums2[p2] > nums1[p1]) {
-    //             nums1[p--] = nums2[p2--]
-    //         }else {
-    //             nums1[p--] = nums1[p1--]
-    //         }
-    //     }    
+        while(p >=0) {
+            if(p2 < 0) break
+            if( p1 < 0 || nums2[p2] > nums1[p1]) {
+                nums1[p--] = nums2[p2--]
+            }else {
+                nums1[p--] = nums1[p1--]
+            }
+        }    
     }
 
     fun simpleMerge(nums1: IntArray, m: Int, nums2: IntArray, n: Int): Unit {
