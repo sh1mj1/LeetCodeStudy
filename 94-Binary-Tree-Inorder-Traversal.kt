@@ -11,14 +11,31 @@
 class Solution {
     val result = mutableListOf<Int>()
     fun inorderTraversal(root: TreeNode?): List<Int> {
-        inorderSearch(root)
+        // inorderSearchRecursive(root)
+        inorderSearchIterative(root)
         return result
     }
 
-    fun inorderSearch(node: TreeNode?) {        
+    fun inorderSearchRecursive(node: TreeNode?) {        
         if(node == null) return
-        inorderSearch(node.left)
+        inorderSearchRecursive(node.left)
         result.add(node.`val`)
-        inorderSearch(node.right)
+        inorderSearchRecursive(node.right)
     }    
+
+    fun inorderSearchIterative(node: TreeNode?) {
+        val stack = Stack<TreeNode>()
+        var current = node
+
+        while(current != null || stack.isNotEmpty()) {
+            while(current != null) {
+                stack.push(current)
+                current = current.left
+            }
+            current = stack.pop()
+            result.add(current.`val`)
+            current = current.right
+        }
+    }
+
 }
