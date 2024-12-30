@@ -1,18 +1,22 @@
 class Solution {
     fun removeDuplicates(nums: IntArray): Int {
-        var min = nums.first() - 1 ?: return 0
-        var idx = 0
+        val size = nums.size
+        if (size == 1) return 1
 
-        for( i in 0 .. nums.size -1) {
-            val current = nums[i] // 1
-            
-            if(current > min) {
-                nums[idx] = current
-                idx++
-                min = current
+        var uniqueIdx = 0
+        var currentIdx = 0
+
+        while (currentIdx < size) {
+            if (currentIdx >= size) return uniqueIdx + 1
+
+            if (nums[currentIdx] == nums[uniqueIdx]) {
+                currentIdx++
+                continue
             }
+            uniqueIdx++
+            nums[uniqueIdx] = nums[currentIdx]
+            currentIdx++
         }
-        
-        return idx
+        return uniqueIdx + 1
     }
 }
