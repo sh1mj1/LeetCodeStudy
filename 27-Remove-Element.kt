@@ -1,21 +1,16 @@
 class Solution {
     fun removeElement(nums: IntArray, `val`: Int): Int {
-    var k = 0
-    var startIdx = 0
-    var endIdx = nums.size -1 
-
-    while(startIdx <= endIdx) {
-        if(nums[startIdx] == `val`) {
-            k++
-            // swap
-            val temp = nums[startIdx]
-            nums[startIdx] = nums[endIdx]
-            nums[endIdx] = temp
-            endIdx--
-        }else {
-            startIdx++
+        var s = 0
+        var e = nums.size
+        while (s < e) {
+            if (nums[s] == `val`) {
+                nums[s] = nums[e -1]
+                e--
+            } else {
+                s++
+            }
         }
+        return e
     }
-    return nums.size - k
-    }
+
 }
