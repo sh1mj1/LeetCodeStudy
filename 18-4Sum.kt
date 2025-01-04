@@ -1,48 +1,38 @@
 class Solution {
     fun fourSum(nums: IntArray, target: Int): List<List<Int>> {
-        val size = nums.size
         nums.sort()
-        val results = mutableListOf<List<Int>>()
+        val numsSize = nums.size
+        val result = mutableListOf<List<Int>>()
+        val targetToLong = target.toLong()
 
-        for (a in 0 .. size - 4) {
-            if (a > 0 && nums[a] == nums[a-1]) continue
+        for (a in 0 until numsSize - 3) {
+            if (a > 0 && nums[a] == nums[a - 1]) continue
 
-            for (b in a + 1 .. size - 3) {
-                if (b > a + 1 && nums[b] == nums[b-1]) continue
+            for (b in a + 1 until numsSize - 2) {
+                if (b > a + 1 && nums[b] == nums[b - 1]) continue
                 
                 var c = b + 1
-                var d = size - 1
+                var d = numsSize - 1
 
                 while (c < d) {
                     val sum = nums[a].toLong() + nums[b].toLong() + nums[c].toLong() + nums[d].toLong()
 
                     when {
-                        sum == target.toLong() -> {
+                        sum == targetToLong -> {
                             val quadruplets = listOf(nums[a], nums[b], nums[c], nums[d])
-                            results.add(quadruplets)
+                            result.add(quadruplets)
 
-                            do {
-                                d--
-                            } while (c < d && nums[d] == nums[d+1])
-                            do {
-                                c++
-                            } while (c < d && nums[c] == nums[c-1])   
+                            do { c++ } while (c < d && nums[c] == nums[c - 1])
+                            do { d-- } while (c < d && nums[d] == nums[d + 1])
                         }
-                        sum > target.toLong() -> {
-                            do {
-                                d--
-                            } while (c < d && nums[d] == nums[d+1])
-                        }
-                        sum < target.toLong() -> {
-                            do {
-                                c++
-                            } while (c < d && nums[c] == nums[c-1])
-                        }
-                        else -> error(\\)
+                        sum < targetToLong -> do { c++ } while ( c < d && nums[c] == nums[c - 1])
+                        sum > targetToLong -> do { d-- } while ( c < d && nums[d] == nums[d + 1])
+                        else -> error(\sum: $sum target: $target\)
                     }
-                }
+                } 
             }
         }
-        return results
+
+        return result
     }
 }
